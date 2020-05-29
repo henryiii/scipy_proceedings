@@ -63,7 +63,7 @@ The fourth and final area identified was **Distribution**. A great library is no
 
 About a year ago, a new C++14 library was being proposed to the Boost C++ libraries called Boost.Histogram. It would later be unanimously accepted and released as part of the Boost C++ libraries version 1.70. It was a well designed header-only package that fulfilled exactly what we wanted, but in C++14 rather than Python. A proposal was made to get a full-featured Python binding developed as part of IRIS-HEP, an institute for sustainable software for HEP, as one of the foundations for a Python based software stack. We built boost-histogram for Python in close collaboration with the original Histogram for Boost author, Hans Dembinski, who had always intended Boost.Histogram to be accessible from Python. Due to this close collaboration, concepts and design closely mimic the spirit of the Boost counterpart.
 
-An example of the boost-histogram library approach, creating a 1D-histogram and a 2D-histogram and adding values to them, is shown below in Figure :ref:`egfig`:
+An example of the boost-histogram library approach, creating a 1D-histogram and a 2D-histogram and adding values to them, is shown below in Figure :ref:`eg1dfig` and :ref:`eg2dfig`:
 
 .. code-block:: python
 
@@ -80,9 +80,13 @@ An example of the boost-histogram library approach, creating a 1D-histogram and 
   hist_2d.fill(np.random.randn(1_000_000), np.random.randn(1_000_000))
   plt.pcolormesh(hist_2d.axes[0].centers, hist_2d.axes[1].centers, hist_2d.view())
 
-.. figure:: histogram_example.pdf
+.. figure:: histogram_example_1d.pdf
    
-   The example of a 1D-histogram and a 2D-histogram. :label:`egfig`
+   The example of a 1D-histogram. :label:`eg1dfig`
+
+.. figure:: histogram_example_2d.pdf
+   
+   The example of a 2D-histogram. :label:`eg2dfig`
 
 The Design of a Histogram
 -------------------------
