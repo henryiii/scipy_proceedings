@@ -63,15 +63,26 @@ The fourth and final area identified was **Distribution**. A great library is no
 
 About a year ago, a new C++14 library was being proposed to the Boost C++ libraries called Boost.Histogram. It would later be unanimously accepted and released as part of the Boost C++ libraries version 1.70. It was a well designed header-only package that fulfilled exactly what we wanted, but in C++14 rather than Python. A proposal was made to get a full-featured Python binding developed as part of IRIS-HEP, an institute for sustainable software for HEP, as one of the foundations for a Python based software stack. We built boost-histogram for Python in close collaboration with the original Histogram for Boost author, Hans Dembinski, who had always intended Boost.Histogram to be accessible from Python. Due to this close collaboration, concepts and design closely mimic the spirit of the Boost counterpart.
 
-An example of the boost-histogram library approach, creating a histogram and adding few values to it, is shown below:
+An example of the boost-histogram library approach, creating a 1D-histogram and a 2D-histogram and adding values to them, is shown below in Figure :ref:`egfig`:
 
 .. code-block:: python
 
-   import boost_histogram as bh
-   hist = bh.Histogram(
-       bh.axes.Regular(bins=10, start=0, stop=1)
-   )
-   hist.fill([.3, .2, .4])
+  import boost_histogram as bh
+  import numpy as np
+  import matplotlib.pyplot as plt
+
+  hist_1d = bh.Histogram(bh.axis.Regular(100, start=-5, stop=5))
+  hist_1d.fill(np.random.randn(1_000_000))
+  plt.bar(hist_1d.axes[0].centers, hist_1d.view(), width=hist_1d.axes[0].widths)
+
+  hist_2d = bh.Histogram(bh.axis.Regular(100, start=-3, stop=3),
+                         bh.axis.Regular(100, start=-3, stop=3))
+  hist_2d.fill(np.random.randn(1_000_000), np.random.randn(1_000_000))
+  plt.pcolormesh(hist_2d.axes[0].centers, hist_2d.axes[1].centers, hist_2d.view())
+
+.. figure:: histogram_example.pdf
+   
+   The example of a 1D-histogram and a 2D-histogram. :label:`egfig`
 
 The Design of a Histogram
 -------------------------
